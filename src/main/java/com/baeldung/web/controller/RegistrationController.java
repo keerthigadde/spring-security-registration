@@ -90,6 +90,23 @@ public class RegistrationController {
         return new ModelAndView("console", model);
     }
 
+    @GetMapping("/manager")
+    public ModelAndView manager(final HttpServletRequest request, final ModelMap model, @RequestParam("messageKey") final Optional<String> messageKey) {
+
+        Locale locale = request.getLocale();
+        messageKey.ifPresentOrElse( key -> {
+                    String message = messages.getMessage(key, null, locale);
+                    model.addAttribute("message", message);
+                },
+                () ->{
+                    String message = messages.getMessage("message.manager.welcome", null, locale);
+                    model.addAttribute("message", message);
+                }
+        );
+
+        return new ModelAndView("manager", model);
+    }
+
     @GetMapping("/badUser")
     public ModelAndView badUser(final HttpServletRequest request, final ModelMap model, @RequestParam("messageKey" ) final Optional<String> messageKey, @RequestParam("expired" ) final Optional<String> expired, @RequestParam("token" ) final Optional<String> token) {
 

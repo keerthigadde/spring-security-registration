@@ -1,1 +1,30 @@
-MANAGER HTML
+<html>
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+          <ul class="nav navbar-nav navbar-right">
+            <li><a th:href="@{/logout}" th:utext="#{label.pages.logout}">logout</a> </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="container">
+    <div th:if="${message != null}" class="alert alert-info" th:utext="${message}">${message}</div>
+
+    <h1>This is the landing page for the manager</h1>
+
+    <div sec:authorize="hasAuthority('MANAGE_VIEW_PRIVILEGE')">This text is only visible to a manager</div>
+
+    <br/>
+
+</div>
+
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script type="text/javascript">
+</script>
+</body>
+
+</html>
